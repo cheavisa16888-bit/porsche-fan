@@ -1,9 +1,10 @@
 // SITE SETTINGS — the basic facts about this website, in one place.
 // Change these first when you make the site your own.
 export const site = {
-  name: 'Vibe Code Cambodia',
-  tagline: 'Make a real website by talking to AI.',
+  name: 'Porsche Fans KH',
+  tagline: 'Everything about Porsche sports cars.',
   description:
-    'A hands-on workshop at New Hope Cambodia: build and publish a marketing website by describing it to an AI.',
-  contactEmail: 'dandelion@dandelion.art',
+    'A fan website from Cambodia about Porsche cars: the famous models, the history, and fun facts. Not the official Porsche website.',
+  // TODO: put your real email here.
+  contactEmail: 'hello@example.com',
 };
