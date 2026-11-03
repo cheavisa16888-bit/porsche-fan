@@ -5,6 +5,7 @@
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import CarArt from '../components/CarArt.astro';
 import { site } from '../site';
 
 const stats = [
@@ -15,48 +16,48 @@ const stats = [
 
 const models = [
   {
-    icon: '🏎️',
     name: '911',
+    shape: 'coupe', color: '#c0182b',
     type: 'Sports car',
     typeKm: 'រថយន្តស្ព័រ',
     text: 'The famous one. Its engine is at the back.',
     textKm: 'រថយន្តដ៏ល្បី។ ម៉ាស៊ីនរបស់វានៅខាងក្រោយ។',
   },
   {
-    icon: '🏁',
     name: '718 Boxster & Cayman',
+    shape: 'roadster', color: '#e8b931',
     type: 'Small sports car',
     typeKm: 'រថយន្តស្ព័រតូច',
     text: 'Two seats. The engine is in the middle.',
     textKm: 'មានកៅអីពីរ។ ម៉ាស៊ីននៅកណ្តាល។',
   },
   {
-    icon: '⚡',
     name: 'Taycan',
+    shape: 'sedan', color: '#2d6cdf',
     type: 'Electric car',
     typeKm: 'រថយន្តអគ្គិសនី',
     text: 'Porsche’s first electric car, from 2019.',
     textKm: 'រថយន្តអគ្គិសនីដំបូងរបស់ Porsche ចាប់ពីឆ្នាំ ២០១៩។',
   },
   {
-    icon: '🚘',
     name: 'Panamera',
+    shape: 'sedan', color: '#9aa0a6',
     type: 'Four-door car',
     typeKm: 'រថយន្តទ្វារបួន',
     text: 'Fast, with room for the whole family.',
     textKm: 'លឿន ហើយមានកន្លែងសម្រាប់គ្រួសារទាំងមូល។',
   },
   {
-    icon: '🚙',
     name: 'Cayenne',
+    shape: 'suv', color: '#2a2c30',
     type: 'Big SUV',
     typeKm: 'រថយន្ត SUV ធំ',
     text: 'Porsche’s first SUV, from 2002.',
     textKm: 'រថយន្ត SUV ដំបូងរបស់ Porsche ចាប់ពីឆ្នាំ ២០០២។',
   },
   {
-    icon: '🚙',
     name: 'Macan',
+    shape: 'suv', color: '#2f6f4f',
     type: 'Smaller SUV',
     typeKm: 'រថយន្ត SUV តូចជាង',
     text: 'A smaller SUV, from 2014.',
@@ -161,7 +162,7 @@ const faqs = [
             <span class="h-1.5 w-16 shrink-0 rounded-full bg-sun"></span>
             <span class="h-1.5 w-16 shrink-0 rounded-full bg-sun"></span>
           </div>
-          <span class="absolute right-[12%] bottom-14 -scale-x-100 text-8xl drop-shadow-2xl sm:text-9xl">🏎️</span>
+          <CarArt shape="coupe" color="#c0182b" class="absolute right-[4%] bottom-4 w-[80%] -scale-x-100 drop-shadow-2xl" />
           <p class="absolute top-6 right-6 font-display text-5xl font-extrabold text-paper/10 sm:text-7xl">911</p>
         </div>
       </div>
@@ -194,13 +195,13 @@ const faqs = [
         {
           models.map((m) => (
             <li class="group rounded-2xl border border-ink/10 bg-white p-6 transition hover:-translate-y-1 hover:border-brand hover:shadow-xl">
-              <div class="flex items-start justify-between">
-                <span class="text-4xl">{m.icon}</span>
-                <span class="rounded-full bg-ink/5 px-3 py-1 text-xs font-semibold text-muted">
-                  {m.type} <span lang="km" class="font-khmer font-normal">· {m.typeKm}</span>
-                </span>
+              <div class="rounded-xl bg-paper px-4 pt-6 pb-2">
+                <CarArt shape={m.shape} color={m.color} label={`Drawing of a Porsche ${m.name}`} class="w-full transition group-hover:translate-x-2" />
               </div>
-              <h3 class="mt-4 font-display text-3xl font-extrabold group-hover:text-brand">{m.name}</h3>
+              <span class="mt-4 inline-block rounded-full bg-ink/5 px-3 py-1 text-xs font-semibold text-muted">
+                {m.type} <span lang="km" class="font-khmer font-normal">· {m.typeKm}</span>
+              </span>
+              <h3 class="mt-2 font-display text-3xl font-extrabold group-hover:text-brand">{m.name}</h3>
               <p class="mt-2 text-muted">
                 {m.text}
                 <span class="km" lang="km">{m.textKm}</span>

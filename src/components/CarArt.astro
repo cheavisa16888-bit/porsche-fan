@@ -1,0 +1,63 @@
+---
+// A simple drawing of a car, seen from the side. Drawn in code, so no photos
+// (and no copyright worries). Pick a shape and a paint color:
+//   <CarArt shape="coupe" color="#c0182b" />
+interface Props {
+  shape: 'coupe' | 'roadster' | 'sedan' | 'suv';
+  color: string;
+  label?: string;
+  class?: string;
+}
+
+const { shape, color, label, class: className } = Astro.props;
+
+// Body outline and windows for each shape. The picture is 240 wide, 100 tall.
+const shapes = {
+  // Sports car with the famous sloping roof (like the 911)
+  coupe: {
+    body: 'M14 72 L14 62 Q16 54 40 52 L82 48 Q96 30 120 28 Q150 27 178 40 Q200 48 214 54 Q224 58 224 66 L224 72 Z',
+    windows: 'M92 48 Q102 35 120 32 Q140 32 160 41 L164 48 Z',
+  },
+  // Open-top two-seater (like the Boxster)
+  roadster: {
+    body: 'M14 72 L14 62 Q16 55 40 53 L92 50 L108 38 L113 38 L104 50 L160 50 Q205 50 222 58 L224 72 Z',
+    windows: 'M120 50 Q120 40 128 40 Q136 40 136 50 Z M140 50 Q140 40 148 40 Q156 40 156 50 Z',
+  },
+  // Long four-door car (like the Panamera or Taycan)
+  sedan: {
+    body: 'M10 72 L10 62 Q12 54 36 52 L74 48 Q90 30 116 28 Q162 27 192 42 Q212 50 224 56 L226 72 Z',
+    windows: 'M86 48 Q98 34 116 32 L132 32 L132 48 Z M136 48 L136 32 Q162 32 182 44 L184 48 Z',
+  },
+  // Tall SUV (like the Cayenne or Macan)
+  suv: {
+    body: 'M12 74 L12 58 Q14 48 36 46 L70 44 Q86 24 110 22 L176 22 Q196 26 212 42 Q224 48 226 58 L226 74 Z',
+    windows: 'M82 44 Q94 28 110 27 L140 27 L140 44 Z M144 44 L144 27 L174 27 Q190 30 202 44 Z',
+  },
+}[shape];
+
+const wheelR = shape === 'suv' ? 17 : 15;
+---
+
+<svg
+  viewBox="0 0 240 100"
+  class={className}
+  role={label ? 'img' : undefined}
+  aria-label={label}
+  aria-hidden={label ? undefined : 'true'}
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <ellipse cx="120" cy="88" rx="108" ry="6" fill="#000" opacity="0.15" />
+  <path d={shapes.body} fill={color} />
+  <path d={shapes.windows} fill="#1b2a3a" opacity="0.85" />
+  <ellipse cx="20" cy="60" rx="4" ry="3" fill="#fff6c8" />
+  <rect x="216" y="60" width="8" height="4" rx="2" fill="#ff4d4d" />
+  {
+    [52, 188].map((x) => (
+      <g>
+        <circle cx={x} cy="74" r={wheelR} fill="#16171a" />
+        <circle cx={x} cy="74" r={wheelR * 0.5} fill="#cfd2d6" />
+        <circle cx={x} cy="74" r={wheelR * 0.15} fill="#16171a" />
+      </g>
+    ))
+  }
+</svg>
